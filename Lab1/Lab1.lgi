@@ -29,12 +29,12 @@ a_2
 a_1
 19 32 384 91 365 0
 a_0
-22 64 472 208 452 0 \NUL
-Place comments here
-22 64 496 204 476 0 \NUL
-describing the output
-22 448 472 592 452 0 \NUL
-Place comments here
+22 15 452 314 428 0 \NUL
+The output was base on the switches
+22 64 496 68 492 0 \NUL
+
+22 406 427 780 403 0 \NUL
+since I use the Boolean to come up with circuit.
 7 360 664 409 615 0 1
 7 360 704 409 655 0 1
 19 272 592 331 573 0
@@ -49,12 +49,12 @@ SOP/POS
 NAND Only
 22 416 608 484 588 0 \NUL
 NOR Only
-22 448 496 588 476 0 \NUL
-describing the output
-22 272 744 416 724 0 \NUL
-Place comments here
-22 272 768 412 748 0 \NUL
-describing the output
+22 443 459 701 435 0 \NUL
+and connect them with the input
+22 209 722 649 698 0 \NUL
+I used truth table given in doc to come up with equation
+22 208 745 611 721 0 \NUL
+Then used the equation to come up with the circuit
 22 280 32 653 12 0 \NUL
 You are only permitted to modify or add text to this page.
 22 280 56 605 36 0 \NUL
@@ -77,20 +77,30 @@ Input
 Part B Output                            
 22 272 552 473 532 0 \NUL
 Part C Output                            
-1 481 198 470 159
-1 398 159 409 198
-1 326 159 337 198
-1 262 159 265 198
-1 136 302 169 390
-1 120 326 169 396
-1 104 350 169 402
-1 88 374 169 408
-1 361 639 328 622
-1 361 679 328 662
-1 473 335 472 382
-1 545 335 544 382
-1 617 335 616 382
-1 361 599 328 582
+22 7 484 374 460 0 \NUL
+The switches represent logic between 1 and 0
+22 -20 515 558 491 0 \NUL
+If the switch is 1 which mean on then one of the 7 segment line will be on.
+22 399 487 787 463 0 \NUL
+the output result are the same as the truth table.
+22 153 773 799 749 0 \NUL
+When stimulate it, the LED will turn on base on the input is given in the truth table.
+22 20 545 180 521 0 \NUL
+If it 0, then mean off
+1 470 159 481 198
+1 409 198 398 159
+1 337 198 326 159
+1 265 198 262 159
+1 169 390 136 302
+1 169 396 120 326
+1 169 402 104 350
+1 169 408 88 374
+1 328 622 361 639
+1 328 662 361 679
+1 472 382 473 335
+1 544 382 545 335
+1 616 382 617 335
+1 328 582 361 599
 38 2
 22 8 32 48 12 0 \NUL
 Lab 1
@@ -116,10 +126,16 @@ a_1
 a_0
 22 106 32 160 8 0 \NUL
 Part A
-1 158 278 88 278
-1 158 254 88 254
-1 158 230 88 230
-1 158 206 88 206
+22 7 338 780 314 0 \NUL
+This circuit work by using switches , which is sender and it send signal to the 7 segment( receiver)
+22 10 375 667 351 0 \NUL
+if the switch is 1 which mean its on, then the receiver are able to receive the signal.
+22 8 421 642 397 0 \NUL
+If the switch is 0 which mean its off, then the receiver can not receive the signal.
+1 88 278 158 278
+1 88 254 158 254
+1 88 230 158 230
+1 88 206 158 206
 38 3
 22 8 32 48 12 0 \NUL
 Lab 1
@@ -141,11 +157,23 @@ b_2
 b_1
 22 150 33 204 9 0 \NUL
 Part B
-1 178 96 100 216
-1 178 68 100 192
-1 395 320 228 220
-1 422 61 223 82
-1 385 166 100 216
+22 -4 369 805 345 0 \NUL
+Base on the truth table, I saw the output of B0 is 0 all the way, which mean it was connected to ground
+22 -3 442 479 418 0 \NUL
+since I came up with the Boolean equation for the truth table
+22 -3 404 498 380 0 \NUL
+For B2 and B3, they were not nessescary need it for the circuit.
+22 0 476 504 452 0 \NUL
+I realized that it would be insufficient to draw out the big circuit.
+22 2 504 691 480 0 \NUL
+So I figured out the way that we can used XOR gate to shorten the length of the circuit.
+22 -1 541 569 517 0 \NUL
+So When I tested, the result are exacly like what the truth table showed.
+1 100 216 178 96
+1 100 192 178 68
+1 228 220 395 320
+1 223 82 422 61
+1 100 216 385 166
 38 4
 22 8 32 48 12 0 \NUL
 Lab 1
@@ -190,29 +218,41 @@ in_0
 4 391 313 440 264 2 0
 20 472 298 531 279 0
 c_0
-1 88 139 166 140
-1 211 140 234 138
-1 88 163 169 160
-1 214 160 234 152
-1 88 187 234 166
-1 91 230 149 224
-1 194 224 231 229
-1 88 254 231 243
-1 88 278 147 279
-1 192 279 231 257
-1 87 343 231 350
-1 87 367 136 360
-1 181 360 231 364
-1 87 391 139 393
-1 184 393 231 378
-1 91 464 232 474
-1 91 488 232 488
-1 91 512 232 502
-1 279 152 392 274
-1 276 243 392 283
-1 276 364 392 293
-1 277 488 392 302
-1 437 288 473 288
+22 135 35 189 11 0 \NUL
+Part C
+22 15 564 741 540 0 \NUL
+I used truth table in part C to come up with Boolean equation, which is a'b'c+a'bc'+ab'c'+abc
+22 17 595 21 591 0 \NUL
+
+22 14 594 694 570 0 \NUL
+Then I converted the equation into the circuit, which inclu 4 And gate and one Or gate.
+22 32 623 502 599 0 \NUL
+Then I connected all the in put into the gate and stimulate it
+22 26 655 338 631 0 \NUL
+The result was the same as truth table.
+1 166 140 88 139
+1 234 138 211 140
+1 169 160 88 163
+1 234 152 214 160
+1 234 166 88 187
+1 149 224 91 230
+1 231 229 194 224
+1 231 243 88 254
+1 147 279 88 278
+1 231 257 192 279
+1 231 350 87 343
+1 136 360 87 367
+1 231 364 181 360
+1 139 393 87 391
+1 231 378 184 393
+1 232 474 91 464
+1 232 488 91 488
+1 232 502 91 512
+1 392 274 279 152
+1 392 283 276 243
+1 392 293 276 364
+1 392 302 277 488
+1 473 288 437 288
 38 5
 22 8 32 48 12 0 \NUL
 Lab 1
@@ -257,78 +297,100 @@ in_0
 3 378 311 427 262 2 1
 20 469 294 528 275 0
 c_1
-1 88 139 166 140
-1 211 140 234 138
-1 88 163 169 160
-1 214 160 234 152
-1 88 187 234 166
-1 91 230 149 224
-1 194 224 231 229
-1 88 254 231 243
-1 88 278 147 279
-1 192 279 231 257
-1 87 343 231 350
-1 87 367 136 360
-1 181 360 231 364
-1 87 391 139 393
-1 184 393 231 378
-1 91 464 232 474
-1 91 488 232 488
-1 91 512 232 502
-1 279 152 379 272
-1 276 243 379 281
-1 276 364 379 291
-1 277 488 379 300
-1 424 286 470 284
+22 133 42 158 18 0 \NUL
+C1
+22 47 563 725 539 0 \NUL
+For C1, it is similar C0, but what I changed was convert all the AND gate to NAND gate
+22 52 600 340 576 0 \NUL
+and changed OR gate to NAND gate
+22 39 627 691 603 0 \NUL
+Then I check it out the NAND gate truth table, so I can be sure it work on my circuit
+22 37 664 423 640 0 \NUL
+When I stimulate it, it work perfectly as I wanted.
+1 166 140 88 139
+1 234 138 211 140
+1 169 160 88 163
+1 234 152 214 160
+1 234 166 88 187
+1 149 224 91 230
+1 231 229 194 224
+1 231 243 88 254
+1 147 279 88 278
+1 231 257 192 279
+1 231 350 87 343
+1 136 360 87 367
+1 231 364 181 360
+1 139 393 87 391
+1 231 378 184 393
+1 232 474 91 464
+1 232 488 91 488
+1 232 502 91 512
+1 379 272 279 152
+1 379 281 276 243
+1 379 291 276 364
+1 379 300 277 488
+1 470 284 424 286
 38 6
 22 8 32 48 12 0 \NUL
 Lab 1
 22 8 64 111 40 0 \NUL
 Pham, Nghia
-22 8 96 48 76 0 \NUL
-sslug
-19 97 293 156 274 0
+22 8 96 90 72 0 \NUL
+ngmpham
+19 95 240 154 221 0
 in_2
-19 97 317 156 298 0
+19 95 264 154 245 0
 in_1
-19 97 341 156 322 0
+19 95 288 154 269 0
 in_0
-4 368 222 417 173 1 1
-5 265 198 314 149 0
-5 269 231 318 182 0
-4 371 324 420 275 1 1
-5 252 346 301 297 0
-5 256 416 305 367 0
-4 375 426 424 377 1 1
-5 296 466 345 417 0
-5 299 513 348 464 0
-4 376 550 425 501 1 1
-4 536 343 585 294 2 1
-20 683 330 742 311 0
+4 366 169 415 120 1 1
+5 263 145 312 96 0
+5 267 178 316 129 0
+4 369 271 418 222 1 1
+5 250 293 299 244 0
+5 254 363 303 314 0
+4 373 373 422 324 1 1
+5 294 413 343 364 0
+5 297 460 346 411 0
+4 374 497 423 448 1 1
+4 534 290 583 241 2 1
+20 681 277 740 258 0
 c_2
-1 153 283 266 173
-1 153 307 270 206
-1 311 173 369 183
-1 315 206 369 197
-1 153 331 369 211
-1 153 283 253 321
-1 153 307 372 299
-1 153 331 257 391
-1 298 321 372 285
-1 302 391 372 313
-1 153 283 376 387
-1 153 307 297 441
-1 153 331 300 488
-1 342 441 376 401
-1 345 488 376 415
-1 153 283 377 511
-1 153 307 377 525
-1 153 331 377 539
-1 414 197 537 304
-1 417 299 537 313
-1 421 401 537 323
-1 422 525 537 332
-1 582 318 684 320
+22 147 37 172 13 0 \NUL
+C2
+22 20 519 547 495 0 \NUL
+It was similar to C1, I replace all the NAND gate with the NOR gate.
+22 22 551 542 527 0 \NUL
+Before I  stimulate it in, I checked out the truth table for NOR gate
+22 11 583 757 559 0 \NUL
+I saw that as long there is 1 in the input the output will be 0, but if the all input is 0 then will be 1
+22 10 619 483 595 0 \NUL
+As I tested it out on paper, it worked perfectly on my circuit.
+22 9 658 426 634 0 \NUL
+So, when I stimulate it, it give me the result I wanted.
+1 264 120 151 230
+1 268 153 151 254
+1 367 130 309 120
+1 367 144 313 153
+1 367 158 151 278
+1 251 268 151 230
+1 370 246 151 254
+1 255 338 151 278
+1 370 232 296 268
+1 370 260 300 338
+1 374 334 151 230
+1 295 388 151 254
+1 298 435 151 278
+1 374 348 340 388
+1 374 362 343 435
+1 375 458 151 230
+1 375 472 151 254
+1 375 486 151 278
+1 535 251 412 144
+1 535 260 415 246
+1 535 270 419 348
+1 535 279 420 472
+1 682 267 580 265
 39 16777215
 47 0
 40 1 8 8
