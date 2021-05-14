@@ -30,6 +30,8 @@
     changeline: .asciiz "\n"
 .text
 main:
+    li $t1, 0 # load value of 0 into register t1
+    li $t3, 0# load value of 0 into register t3
     li $v0, 4          # it mean to tell the program to get ready to print something 
     la $a0, height# this giving the detail what it need to printfrom the .data which is the height of the triagnle
     syscall# to tell computer to execute the code
@@ -37,16 +39,14 @@ main:
     syscall# execute the code
     move $t0, $v0    # move the user input #vo into register #t0
     blez $t0, Invalid# if register t0 is less than or equal to 0 then it will jump to invalid and give out message "invalid entry!"
-    li $t1, 0 # load value of 0 into register t1
-    li $t3, 0# load value of 0 into register t3
 loop1:
-    li $t2, 0# load the value of 0 into register t2
     move $t4, $t1# set register t1 equal to register t4
     sub $t4, $t0, $t1# register t0-t1
     sub $t4, $t4, 1# this subtract register t4 by 1 so that I can get the number of tab
+    li $t2, 0# load the value of 0 into register t2
 loop2:
     blt $t2, $t4, output# this mean when register t2 is equal to t4 the program will stop printing tab
-b loop4 # this will branch to loop 4
+    b loop4 # this will branch to loop 4
 loop3:
     blt $t1, $t0, loop1 # this to check if register t1 is less than register t0 then jump to loop 1
     b endprogram #branch to endprogram
