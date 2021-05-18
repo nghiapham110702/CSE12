@@ -45,17 +45,11 @@ loop1:
     sub $t4, $t4, 1# this subtract register t4 by 1 so that I can get the number of tab
     li $t2, 0# load the value of 0 into register t2
 loop2:
-    blt $t2, $t4, output# this mean when register t2 is equal to t4 the program will stop printing tab
+    blt $t2, $t4, loop6# this mean when register t2 is equal to t4 the program will stop printing tab
     b loop4 # this will branch to loop 4
 loop3:
     blt $t1, $t0, loop1 # this to check if register t1 is less than register t0 then jump to loop 1
     b endprogram #branch to endprogram
- output:
-    li $v0, 4# to tell the program be ready to print something
-    la $a0, tab# then this will load the tab from .data in to the registwer $a0
-    syscall# then will execute the code
-    addi $t2, $t2, 1 # this add register t2 by 1 to create the number of tab
-    b loop2 # this will branch to loop 2 to see if register t2 and t4 are equal then it will stop printing tab
 loop4:
     addi $t3, $t3, 1# add register t3 by 1
     li $v0, 1# this to tell program to print an interger
@@ -86,6 +80,12 @@ loop5:
     la $a0, ($t3)# print the interger in register t3
     syscall #execute the code
     b line# branch back to line
+loop6:
+    li $v0, 4# to tell the program be ready to print something
+    la $a0, tab# then this will load the tab from .data in to the registwer $a0
+    syscall# then will execute the code
+    addi $t2, $t2, 1 # this add register t2 by 1 to create the number of tab
+    b loop2 # this will branch to loop 2 to see if register t2 and t4 are equal then it will stop printing tab
 Invalid:
     li $v0, 4# to tell the program ready to print something
     la $a0, errormessage# this will print the "invalid entry!" message when the user put the input less than or equal to 0 
