@@ -145,7 +145,16 @@ draw_horizontal_line: nop
     #mul $t0, $a0, 128
     #mul $t0, $t0, 4
     #addi $t0, $t0, 0xFFFF0000 #X
- 
+   li $t0, 0x00000000
+    horizontalloop:
+        getPixelAddress($t2, $t0, $a0)
+        sw $a1, ($t2)
+        addi $t0, $t0, 1# increment t0 by 1
+        bgt $t0, 127, end # if the t0 is greater than 127 it will branch to (end) which will jump return register
+        j horizontalloop# if t0 is not greater than 127 then it will jump back to loop horizontal loop until it is greater than 127
+        # a line is just basically the long memory, sicne we are doing 128
+        # this code will do that it will draw the memory from 0 to 127 which mean when it reach to 127 then it will stop producing memory. 
+     end:
          jr $ra
 
 #*****************************************************
@@ -159,7 +168,17 @@ draw_horizontal_line: nop
 #*****************************************************
 draw_vertical_line: nop
     # YOUR CODE HERE, only use t registers (and a, v where appropriate)
-  
+    li $v0, 1
+    syscall 
+    li $t5, 0x00000000 #y
+    vert_loop:
+        getPixelAddress($t4, $a0, $t5)# a line is just basically the long memory, sicne we are doing 128
+        # this code will do that it will draw the memory from 0 to 127 which mean when it reach to 127 then it will stop producing memory. 
+        sw $a1, ($t4)
+        addi $t5, $t5, 1
+        bgt, $t5, 127, stop
+        j vert_loop
+    stop:
         jr $ra
 
 #*****************************************************
@@ -176,6 +195,26 @@ draw_vertical_line: nop
 #*****************************************************
 draw_crosshair: nop
 	push($ra)
+	 getCoordinates($a0, $t0, $t1)# recall the macro funtion
+   	 getPixelAddress($t2, $t0, $t1)
+   	 lw $t6,($t2) 
+    	push($t0)# push all the register value to stack memory
+  #so that it can conserve the value of y coordinate, which mean the position of y and x will not be change.
+    	push($t1)
+    	push($t2)
+    	push($t6)
+    	push($a0)
+    	srl $a0,$a0,16 # this will shift another right logical from where it is to 16 space
+    	jal draw_vertical_line #then jump to vertical line function which will draw the vertical line at that position
+   	pop($a0)
+    	jal draw_horizontal_line# this will draw the horizontal line
+   	 nop
+    	pop($t6)# sincd the push put the value of register on top of eachother to keep it value to be conserve, the pop will do the opposite
+    	# where they do botton to top so that they can conserve the value of x coorsinate
+    	pop($t2)
+    	pop($t1)
+    	pop($t0)
+    	sw $t6,($t2)
 	
 	# HINT: Store the pixel color at $a0 before drawing the horizontal and 
 	# vertical lines, then afterwards, restore the color of the pixel at $a0 to 
