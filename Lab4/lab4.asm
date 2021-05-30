@@ -88,8 +88,16 @@ syscall
 #*****************************************************
 clear_bitmap: nop
     # YOUR CODE HERE, only use t registers (and a, v where appropriate)
-  
+    li $t0, 0xFFFF0000 # this is for Counter
+    bodyloop: 
+        sw $a0, ($t0) #store
+        addi $t0, $t0, 4 # increament #t0 by 4
+        bgt $t0, 0xFFFFFFFC, getout # if t0 is greater than 0xFFFFFFC, then it will go to get out which will return regisger
+        j bodyloop# but if the value of t0 is not greater than  0xFFFFFFC then it will jump back to body loop 
+    getout:
         jr $ra
+        # sw instruction help to write the memory from 0xFFFF0000 to the end of the bitmap display addresses. Since MIPS is byte-addressable so If I increase the address by one, 
+        #then I move 1 byte over, Since I need to move 4 bytes over which mean I would need to increament the address by 4.
 
 #*****************************************************
 # draw_pixel: Given a coordinate in $a0, sets corresponding 
@@ -103,7 +111,9 @@ clear_bitmap: nop
 #*****************************************************
 draw_pixel: nop
     # YOUR CODE HERE, only use t registers (and a, v where appropriate)
-   
+    getCoordinates($a0, $t0, $t1)# call back macro getcoordinate
+    getPixelAddress($t2, $t0, $t1)#call back marcro getPixeladdress
+    sw $a1, ($t2) # store a1 into register t2
     jr $ra
 	
 #*****************************************************
@@ -117,7 +127,9 @@ draw_pixel: nop
 #*****************************************************
 get_pixel: nop
     # YOUR CODE HERE, only use t registers (and a, v where appropriate)
-    
+    getCoordinates($a0, $t0, $t1)# call back macro getcoordinate
+    getPixelAddress($t2, $t0, $t1)#call back marcro getPixeladdress
+    lw $v0, ($t2) # load data from t2 into v0
     jr $ra
 #*****************************************************
 # draw_horizontal_line: Draws a horizontal line
