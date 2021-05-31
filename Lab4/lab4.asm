@@ -1,3 +1,18 @@
+##########################################################################
+# Created by:  Pham, Nghia                                               #
+#              ngmpham                                                   #
+#              May 31 2021                                               #
+#                                                                        #
+# Assignment:  Lab 4: Function and graph                                 #
+#              CMPE 012, Computer Systems and Assembly Language          #
+#              UC Santa Cruz, Spring 2021                                #
+#                                                                        #
+# Description: creat bitmap display and in that we draw few lines        #
+#                                                                        #
+# Notes:       This program is intended to be run from the MARS IDE.     #
+##########################################################################
+#Register usage: 
+#t1,t2,t3,t4,t5,t6, and t7
 # Spring 2021 CSE12 Lab 4 Template
 ######################################################
 # Macros made for you (you will need to use these)
@@ -88,12 +103,12 @@ syscall
 #*****************************************************
 clear_bitmap: nop
     # YOUR CODE HERE, only use t registers (and a, v where appropriate)
-    li $t0, 0xFFFF0000 # this is for Counter
+    li $t1, 0xFFFF0000 # this is for Counter
     bodyloop: 
-        sw $a0, ($t0) #store
-        addi $t0, $t0, 4 # increament #t0 by 4
-        bgt $t0, 0xFFFFFFFC, getout # if t0 is greater than 0xFFFFFFC, then it will go to get out which will return regisger
-        j bodyloop# but if the value of t0 is not greater than  0xFFFFFFC then it will jump back to body loop 
+        sw $a0, ($t1) #store
+        addi $t1, $t1, 4 # increament #t0 by 4
+        bgt $t1, 0xFFFFFFFC, getout # if t1 is greater than 0xFFFFFFC, then it will go to get out which will return regisger
+        j bodyloop# but if the value of t1 is not greater than  0xFFFFFFC then it will jump back to body loop 
     getout:
         jr $ra
         # sw instruction help to write the memory from 0xFFFF0000 to the end of the bitmap display addresses. Since MIPS is byte-addressable so If I increase the address by one, 
@@ -145,13 +160,13 @@ draw_horizontal_line: nop
     #mul $t0, $a0, 128
     #mul $t0, $t0, 4
     #addi $t0, $t0, 0xFFFF0000 #X
-   li $t0, 0x00000000
-    horizontalloop:
-        getPixelAddress($t2, $t0, $a0)
+   li $t3, 0x00000000
+    secondloop:
+        getPixelAddress($t2, $t3, $a0)# recall macro getpixel address
         sw $a1, ($t2)
-        addi $t0, $t0, 1# increment t0 by 1
-        bgt $t0, 127, end # if the t0 is greater than 127 it will branch to (end) which will jump return register
-        j horizontalloop# if t0 is not greater than 127 then it will jump back to loop horizontal loop until it is greater than 127
+        addi $t3, $t3, 1# increment t0 by 1
+        bgt $t3, 127, end # if the t0 is greater than 127 it will branch to (end) which will jump return register
+        j secondloop# if t0 is not greater than 127 then it will jump back to loop horizontal loop until it is greater than 127
         # a line is just basically the long memory, sicne we are doing 128
         # this code will do that it will draw the memory from 0 to 127 which mean when it reach to 127 then it will stop producing memory. 
      end:
@@ -168,16 +183,14 @@ draw_horizontal_line: nop
 #*****************************************************
 draw_vertical_line: nop
     # YOUR CODE HERE, only use t registers (and a, v where appropriate)
-    li $v0, 1
-    syscall 
-    li $t5, 0x00000000 #y
-    vert_loop:
-        getPixelAddress($t4, $a0, $t5)# a line is just basically the long memory, sicne we are doing 128
+    li $t7, 0x00000000 #y
+    thirdloop:
+        getPixelAddress($t4, $a0, $t7)# a line is just basically the long memory, sicne we are doing 128
         # this code will do that it will draw the memory from 0 to 127 which mean when it reach to 127 then it will stop producing memory. 
         sw $a1, ($t4)
-        addi $t5, $t5, 1
-        bgt, $t5, 127, stop
-        j vert_loop
+        addi $t7, $t7, 1# increment t0 by 1
+        bgt, $t7, 127, stop# if the t0 is greater than 127 it will branch to (end) which will jump return register
+        j thirdloop# if t0 is not greater than 127 then it will jump back to loop horizontal loop until it is greater than 127
     stop:
         jr $ra
 
@@ -195,27 +208,30 @@ draw_vertical_line: nop
 #*****************************************************
 draw_crosshair: nop
 	push($ra)
-	 getCoordinates($a0, $t0, $t1)# recall the macro funtion
-   	 getPixelAddress($t2, $t0, $t1)
-   	 lw $t6,($t2) 
-    	push($t0)# push all the register value to stack memory
-  #so that it can conserve the value of y coordinate, which mean the position of y and x will not be change.
-    	push($t1)
-    	push($t2)
-    	push($t6)
-    	push($a0)
-    	srl $a0,$a0,16 # this will shift another right logical from where it is to 16 space
-    	jal draw_vertical_line #then jump to vertical line function which will draw the vertical line at that position
-   	pop($a0)
-    	jal draw_horizontal_line# this will draw the horizontal line
-   	 nop
-    	pop($t6)# sincd the push put the value of register on top of eachother to keep it value to be conserve, the pop will do the opposite
+	 getCoordinates($a0, $t0, $t1)
+        getPixelAddress($t2, $t0, $t1)
+        lw $t6,($t2)
+        push($t0)# 
+        push($t1)# push the register t to stack memory to keep the value of y conserve
+        push($t2)
+        push($t6)
+        push($a0)
+        srl $a0,$a0,16 # this will shift another right logical from where it is to 16 space
+        jal draw_vertical_line  #then jump to vertical line function which will draw the vertical line at that position
+       pop($a0)# sincd the push put the value of register on top of eachother to keep it value to be conserve, the pop will do the opposite
     	# where they do botton to top so that they can conserve the value of x coorsinate
-    	pop($t2)
-    	pop($t1)
-    	pop($t0)
-    	sw $t6,($t2)
-	
+       push($a0)
+       sll $a0,$a0,16 # then shift left logical
+       srl $a0,$a0,16 
+        jal draw_horizontal_line # this will draw the horizontal line
+        nop
+        pop($a0)
+        pop($t6)
+        pop($t2)
+        pop($t1)
+        pop($t0)
+        sw $t6,($t2)
+    
 	# HINT: Store the pixel color at $a0 before drawing the horizontal and 
 	# vertical lines, then afterwards, restore the color of the pixel at $a0 to 
 	# give the appearance of the center being transparent.
