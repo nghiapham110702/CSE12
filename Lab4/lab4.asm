@@ -228,6 +228,7 @@ draw_crosshair: nop
         pop($t1)
         pop($t0)
         sw $t6,($t2)
+        pop($ra)
     
 	# HINT: Store the pixel color at $a0 before drawing the horizontal and 
 	# vertical lines, then afterwards, restore the color of the pixel at $a0 to 
